@@ -52,3 +52,36 @@ body {
   --color-white-10: #FFFFFF1A;
   --color-white-5: #FFFFFF0D;
 }
+
+@layer utilities {
+  .rdp-day_selected .rdp-day_button {
+    @apply bg-primary-100 border-indigo-500;
+  }
+
+  .rdp-range_end .rdp-day_button {
+    @apply bg-primary-40;
+  }
+}
+
+.rdp-selected-1.rdp-range_start .rdp-day_button,
+.rdp-selected-1.rdp-range_end .rdp-day_button {
+  background: unset;
+  color: var(--color-gray-100);
+  border-radius: unset;
+}
+
+.rdp-selected-1.rdp-range_middle {
+  background: var(--color-primary-40);
+}
+
+.rdp-selected-1.rdp-range_start.rdp-range_end {
+  background: var(--color-primary-40);
+}
+
+.rdp-selected-1.rdp-range_start {
+  background: var(--color-primary-40);
+}
+
+.rdp-selected-1.rdp-range_end {
+  background: var(--color-primary-40);
+}

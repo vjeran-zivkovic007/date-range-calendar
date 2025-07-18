@@ -19,16 +19,17 @@ export function BidCalendar({
   return (
     <DayPicker
       mode="range"
+      numberOfMonths={2}
       navLayout="around"
       weekStartsOn={1}
       className={`${ibmPlexSans.className} text-gray-100 ${className}`}
       classNames={{
-        today: `border-amber-500`, // Add a border to today's date
-        selected: `bg-amber-500 border-amber-500 text-white`, // Highlight the selected day
+        today: `border-amber-500`,
+        selected: `rdp-selected-1`,
         root: `${defaultClassNames.root} rounded-xl p-5 bg-white-100`,
         chevron: `fill-gray-60 w-4 h-4`,
         caption_label: `${defaultClassNames.caption_label} text-primary-100 text-base uppercase font-medium`,
-        weekdays: `${defaultClassNames.weekdays} uppercase`,
+        weekdays: `uppercase`,
         weekday: `py-2 font-medium last:text-primary-100 text-[12px]`,
         day: `${defaultClassNames.day} text-sm`,
         ...classNames,
