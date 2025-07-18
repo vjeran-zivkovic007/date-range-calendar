@@ -89,3 +89,20 @@ body {
   border-bottom: 44px solid var(--color-primary-40);
   border-right: 44px solid transparent;
 }
+
+.PopoverContent {
+  transform-origin: var(--radix-popover-content-transform-origin);
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
