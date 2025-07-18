@@ -1,1 +1,1 @@
-export { BidCalendar } from "./calendar";
+export { Calendar } from "./calendar";

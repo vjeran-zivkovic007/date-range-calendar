@@ -1,3 +1,4 @@
+import { ibmPlexSans } from "@/app/lib/fonts";
 import { useState } from "react";
 
 const backgroundImageCalendar = `url('/calendar.svg')`;
@@ -10,17 +11,21 @@ const backgroundImageStyles = {
 };
 
 export const Input = ({ ...props }) => {
-  const [value, setValue] = useState("Select Dates");
-
   return (
-    <div className="relative flex items-center" {...props}>
+    <div className={`${ibmPlexSans.className} relative flex items-center`}>
+      <div
+        style={{ ...backgroundImageStyles }}
+        className="flex flex-col absolute w-full py-4 px-22 text-[20px] text-gray-60"
+        {...props}
+      >
+        <span className="font-light">Select Dates</span>
+        <span className="font-normal text-[14px]">Select Dates</span>
+      </div>
       <input
         className="bg-white-100 w-100 text-[20px] text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
-        style={{ ...backgroundImageStyles }}
         name="input"
         type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        readOnly
         placeholder=""
       />
       <Button />

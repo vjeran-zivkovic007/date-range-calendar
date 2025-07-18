@@ -10,7 +10,6 @@ export const Footer = () => (
       <span>Check-in</span>
     </div>
 
-    {/* Check-out */}
     <div className="flex items-center space-x-1">
       <svg width="16" height="16" className="border border-gray-300">
         <polygon points="0,16 16,16 0,0" className="fill-primary-40" />

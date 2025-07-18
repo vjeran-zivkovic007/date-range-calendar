@@ -1,18 +1,13 @@
 "use client";
 
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
-import { IBM_Plex_Sans } from "next/font/google";
 import * as Popover from "@radix-ui/react-popover";
 import { Footer } from "./components/footer";
 import "react-day-picker/style.css";
 import { Input } from "./components/input";
+import { ibmPlexSans } from "@/app/lib/fonts";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-});
-
-export function BidCalendar({
+export function Calendar({
   className,
   classNames,
   formatters,
