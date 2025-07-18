@@ -5,7 +5,7 @@ import { IBM_Plex_Sans } from "next/font/google";
 import * as Popover from "@radix-ui/react-popover";
 import { Footer } from "./components/footer";
 import "react-day-picker/style.css";
-import { Button } from "./components/button";
+import { Input } from "./components/input";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ export function BidCalendar({
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <Button>Confirm</Button>
+        <Input />
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content className="PopoverContent" sideOffset={32}>

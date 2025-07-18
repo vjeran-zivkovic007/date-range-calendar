@@ -1,0 +1,40 @@
+import { useState } from "react";
+
+const backgroundImageCalendar = `url('/calendar.svg')`;
+const backgroundImageChevron = `url('/chevron-down.svg')`;
+const backgroundImageStyles = {
+  backgroundImage: `${backgroundImageCalendar}, ${backgroundImageChevron}`,
+  backgroundRepeat: "no-repeat",
+  backgroundPositionY: "center",
+  backgroundPositionX: "50px, 220px",
+};
+
+export const Input = ({ ...props }) => {
+  const [value, setValue] = useState("Select Dates");
+
+  return (
+    <div className="relative flex items-center" {...props}>
+      <input
+        className="bg-white-100 w-100 text-[20px] text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
+        style={{ ...backgroundImageStyles }}
+        name="input"
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder=""
+      />
+      <Button />
+    </div>
+  );
+};
+
+const Button = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      className="absolute right-2 py-3 px-8 bg-primary-100 hover:bg-primary-80 disabled:bg-gray-20 rounded-[64px] text-white-100 text-[20px]"
+      {...props}
+    >
+      Confirm
+    </button>
+  );
+};
