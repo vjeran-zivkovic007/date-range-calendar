@@ -1,6 +1,12 @@
 "use client";
 
-import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
+import {
+  DateRange,
+  DayButtonProps,
+  DayPicker,
+  DayProps,
+  getDefaultClassNames,
+} from "react-day-picker";
 import * as Popover from "@radix-ui/react-popover";
 import { Footer } from "./components/footer";
 import "react-day-picker/style.css";
@@ -44,7 +50,6 @@ export function Calendar({
               caption_label: `${defaultClassNames.caption_label} text-primary-100 text-base uppercase font-medium`,
               weekdays: `uppercase`,
               weekday: `py-2 font-medium last:text-primary-100 text-[12px]`,
-              day: `${defaultClassNames.day} text-sm hover:bg-primary-10`,
               footer: `${defaultClassNames.footer} pt-4`,
               ...classNames,
             }}
@@ -54,10 +59,36 @@ export function Calendar({
                 date.toLocaleString("default", { weekday: "short" }),
               ...formatters,
             }}
+            components={{
+              Day,
+              DayButton,
+            }}
             {...props}
           />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
   );
+
+  function Day({ children, className, ...props }: DayProps) {
+    return (
+      <td
+        className={`${className} text-sm hover:bg-primary-10 text-gray-80 `}
+        {...props}
+      >
+        {children}
+      </td>
+    );
+  }
+
+  function DayButton({ day, className, ...props }: DayButtonProps) {
+    return (
+      <button className={`${className} flex flex-col`} {...props}>
+        {!day.outside && day.date.getDate()}
+        {!day.outside && (
+          <span className="text-[9px] tracking-[-3%] text-gray-40 ">55€</span>
+        )}
+      </button>
+    );
+  }
 }
