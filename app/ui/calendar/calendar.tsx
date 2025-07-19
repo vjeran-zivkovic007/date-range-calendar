@@ -1,11 +1,12 @@
 "use client";
 
-import { DayPicker, getDefaultClassNames } from "react-day-picker";
+import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import * as Popover from "@radix-ui/react-popover";
 import { Footer } from "./components/footer";
 import "react-day-picker/style.css";
 import { Input } from "./components/input";
 import { ibmPlexSans } from "@/app/lib/fonts";
+import { useState } from "react";
 
 export function Calendar({
   className,
@@ -14,11 +15,12 @@ export function Calendar({
   ...props
 }: React.ComponentProps<typeof DayPicker>) {
   const defaultClassNames = getDefaultClassNames();
+  const [selected, setSelected] = useState<DateRange | undefined>();
 
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <Input />
+        <Input dateRange={selected} />
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content className="PopoverContent" sideOffset={32}>
@@ -27,6 +29,12 @@ export function Calendar({
             numberOfMonths={2}
             navLayout="around"
             weekStartsOn={1}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            selected={selected}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            onSelect={setSelected}
             className={`${ibmPlexSans.className} text-gray-100 ${className}`}
             classNames={{
               today: "",

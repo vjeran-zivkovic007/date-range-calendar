@@ -1,5 +1,6 @@
 import { ibmPlexSans } from "@/app/lib/fonts";
-import { useState } from "react";
+import { DateRange } from "react-day-picker";
+import { formatDateRange } from "../utils/utils";
 
 const backgroundImageCalendar = `url('/calendar.svg')`;
 const backgroundImageChevron = `url('/chevron-down.svg')`;
@@ -7,10 +8,16 @@ const backgroundImageStyles = {
   backgroundImage: `${backgroundImageCalendar}, ${backgroundImageChevron}`,
   backgroundRepeat: "no-repeat",
   backgroundPositionY: "center",
-  backgroundPositionX: "50px, 220px",
+  backgroundPositionX: "50px, 280px",
 };
 
-export const Input = ({ ...props }) => {
+interface InputPropsType extends React.HTMLAttributes<HTMLInputElement> {
+  dateRange: DateRange | undefined;
+}
+
+export const Input = ({ dateRange, ...props }: InputPropsType) => {
+  const formattedDate = formatDateRange(dateRange);
+
   return (
     <div className={`${ibmPlexSans.className} relative flex items-center`}>
       <div
@@ -19,10 +26,10 @@ export const Input = ({ ...props }) => {
         {...props}
       >
         <span className="font-light">Select Dates</span>
-        <span className="font-normal text-[14px]">Select Dates</span>
+        <span className="font-normal text-[14px]">{formattedDate}</span>
       </div>
       <input
-        className="bg-white-100 w-100 text-[20px] text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
+        className="bg-white-100 w-120 text-[20px] text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
         name="input"
         type="text"
         readOnly
