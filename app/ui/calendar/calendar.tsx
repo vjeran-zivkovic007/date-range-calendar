@@ -1,13 +1,7 @@
 "use client";
 
 import "react-day-picker/style.css";
-import {
-  DateRange,
-  DayButtonProps,
-  DayPicker,
-  DayProps,
-  getDefaultClassNames,
-} from "react-day-picker";
+import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import * as Popover from "@radix-ui/react-popover";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ibmPlexSans } from "@/app/lib/fonts";
@@ -16,6 +10,7 @@ import { Input } from "./components/input";
 import { useState } from "react";
 import { ModalClose } from "./components/modal-close";
 import { ConfirmButton } from "./components/confirm-button";
+import { Day, DayButton } from "./components/day-picker";
 
 type VariantType = "popup" | "modal";
 
@@ -65,7 +60,9 @@ export function Calendar({ variant }: CalendarProps) {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-gray-60 animate-dialog-overlay" />
-          <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 rounded-md animate-dialog-content">
+          <Dialog.Content
+            className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 rounded-xl animate-dialog-content ${ibmPlexSans.className} font-medium`}
+          >
             <Dialog.Title className="text-xl text-gray-100">
               Choose Period of Stay
             </Dialog.Title>
@@ -123,26 +120,4 @@ function DayPickerInternal({
       {...props}
     />
   );
-
-  function Day({ children, className, ...props }: DayProps) {
-    return (
-      <td
-        className={`${className} text-sm hover:bg-primary-10 text-gray-80 `}
-        {...props}
-      >
-        {children}
-      </td>
-    );
-  }
-
-  function DayButton({ day, className, ...props }: DayButtonProps) {
-    return (
-      <button className={`${className} flex flex-col`} {...props}>
-        {!day.outside && day.date.getDate()}
-        {!day.outside && (
-          <span className="text-[9px] tracking-[-3%] text-gray-40 ">55€</span>
-        )}
-      </button>
-    );
-  }
 }
