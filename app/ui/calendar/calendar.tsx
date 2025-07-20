@@ -15,6 +15,7 @@ import { Footer } from "./components/footer";
 import { Input } from "./components/input";
 import { useState } from "react";
 import { ModalClose } from "./components/modal-close";
+import { ConfirmButton } from "./components/confirm-button";
 
 type VariantType = "popup" | "modal";
 
@@ -37,7 +38,10 @@ export function Calendar({ variant }: CalendarProps) {
     return (
       <Popover.Root>
         <Popover.Trigger asChild>
-          <Input dateRange={selected} />
+          <Input
+            dateRange={selected}
+            renderButton={<ConfirmButton className="absolute right-2" />}
+          />
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content
@@ -64,6 +68,9 @@ export function Calendar({ variant }: CalendarProps) {
               Choose Period of Stay
             </Dialog.Title>
             {renderDayPicker()}
+            <div className="flex justify-end pt-4">
+              <ConfirmButton />
+            </div>
             <Dialog.Close asChild>
               <ModalClose />
             </Dialog.Close>
