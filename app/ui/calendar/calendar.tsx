@@ -15,7 +15,7 @@ import { Footer } from "./components/footer";
 import { Input } from "./components/input";
 import { useState } from "react";
 
-type VariantType = 'popup' | 'modal';
+type VariantType = "popup" | "modal";
 
 export type CalendarProps = {
   variant: VariantType;
@@ -58,7 +58,7 @@ export function Calendar({ variant }: CalendarProps) {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-gray-60 animate-dialog-overlay" />
-          <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 rounded-md">
+          <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 rounded-md animate-dialog-content">
             <Dialog.Title className="text-xl text-gray-100">
               Choose Period of Stay
             </Dialog.Title>
