@@ -56,6 +56,8 @@ export function Calendar({ variant }: CalendarProps) {
   }
 
   if (variant === "modal") {
+    const isConfirmDisabled = !selected;
+
     return (
       <Dialog.Root>
         <Dialog.Trigger asChild>
@@ -69,7 +71,7 @@ export function Calendar({ variant }: CalendarProps) {
             </Dialog.Title>
             {renderDayPicker()}
             <div className="flex justify-end pt-4">
-              <ConfirmButton />
+              <ConfirmButton disabled={isConfirmDisabled} />
             </div>
             <Dialog.Close asChild>
               <ModalClose />
