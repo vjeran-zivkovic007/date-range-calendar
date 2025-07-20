@@ -14,6 +14,7 @@ import { ibmPlexSans } from "@/app/lib/fonts";
 import { Footer } from "./components/footer";
 import { Input } from "./components/input";
 import { useState } from "react";
+import { ModalClose } from "./components/modal-close";
 
 type VariantType = "popup" | "modal";
 
@@ -63,7 +64,9 @@ export function Calendar({ variant }: CalendarProps) {
               Choose Period of Stay
             </Dialog.Title>
             {renderDayPicker()}
-            {/* <Dialog.Close /> */}
+            <Dialog.Close asChild>
+              <ModalClose />
+            </Dialog.Close>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
@@ -94,7 +97,7 @@ function DayPickerInternal({
         chevron: `fill-gray-60 w-4 h-4`,
         caption_label: `${defaultClassNames.caption_label} text-primary-100 text-base uppercase font-medium`,
         weekdays: `uppercase`,
-        weekday: `py-2 font-medium last:text-primary-100 text-[12px]`,
+        weekday: `py-2 font-medium last:text-primary-100 text-xs`,
         footer: `${defaultClassNames.footer} pt-4`,
         ...classNames,
       }}
