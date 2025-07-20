@@ -115,3 +115,11 @@ body {
   border-bottom: 44px solid var(--color-primary-40);
   border-right: 44px solid transparent;
 }
+
+.input-box-shadow {
+  box-shadow:
+    11px 11px 34px 0px #0000000F,
+    44px 43px 62px 0px #0000000D,
+    100px 97px 83px 0px #00000008,
+    177px 172px 99px 0px #00000003;
+}

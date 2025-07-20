@@ -35,7 +35,7 @@ export const Input = ({
         <span className="font-normal text-sm">{formattedDate}</span>
       </div>
       <input
-        className="bg-white-100 w-120 text-xl text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
+        className="input-box-shadow bg-white-100 w-120 text-xl text-gray-60 border border-gray-10 py-4 px-22 rounded-full"
         name="input"
         type="text"
         readOnly
