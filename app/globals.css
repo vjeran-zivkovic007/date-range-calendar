@@ -51,6 +51,43 @@ body {
   --color-white-20: #FFFFFF33;
   --color-white-10: #FFFFFF1A;
   --color-white-5: #FFFFFF0D;
+
+  --animate-dialog-overlay: overlayShow 1s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-popover-content: scaleIn 0.2s ease-out;
+
+  @keyframes overlayShow {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes contentShow {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 @layer utilities {
@@ -88,21 +125,4 @@ body {
   height: 0;
   border-bottom: 44px solid var(--color-primary-40);
   border-right: 44px solid transparent;
-}
-
-.PopoverContent {
-  transform-origin: var(--radix-popover-content-transform-origin);
-  animation: scaleIn 0.2s ease-out;
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
