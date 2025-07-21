@@ -26,6 +26,7 @@ export function Calendar({ variant }: CalendarProps) {
       mode="range"
       selected={selected}
       onSelect={setSelected}
+      className={`${variant === "popup" ? "p-4" : ""}`}
     />
   );
 
