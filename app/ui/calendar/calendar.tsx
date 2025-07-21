@@ -35,7 +35,7 @@ export function Calendar({ variant }: CalendarProps) {
         <Popover.Trigger asChild>
           <Input
             dateRange={selected}
-            renderButton={<ConfirmButton className="absolute right-2" />}
+            renderButton={<ConfirmButton />}
           />
         </Popover.Trigger>
         <Popover.Portal>
