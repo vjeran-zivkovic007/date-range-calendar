@@ -4,9 +4,10 @@ import "react-day-picker/style.css";
 import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
 import { ibmPlexSans } from "@/app/lib/fonts";
 import { Footer } from "./components/footer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Day, DayButton } from "./components/day-picker";
 import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
+import { useForceModal } from "./utils/useForceModal";
 
 export type ModeType = "popup" | "modal";
 
@@ -16,14 +17,9 @@ export type CalendarProps = {
 
 export function Calendar({ mode }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
-  const [forceModal, setForceModal] = useState<boolean>();
+  const forceModal = useForceModal();
 
-  useEffect(() => {
-    const isMobile = window.innerWidth <= 640;
-    setForceModal(isMobile);
-  }, []);
-
-  if (forceModal === undefined) return null;
+  if (forceModal === null) return null;
 
   const useModal = forceModal || mode === "modal";
 
