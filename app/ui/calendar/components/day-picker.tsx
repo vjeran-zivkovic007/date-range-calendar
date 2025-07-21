@@ -23,7 +23,6 @@ export function DayButton({
   modifiers,
   ...props
 }: DayButtonProps) {
-  console.log(props.disabled, day.date.getDate());
   return (
     <button className={`${className} flex flex-col`} {...props}>
       {!day.outside && day.date.getDate()}

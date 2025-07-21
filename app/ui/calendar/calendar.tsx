@@ -1,19 +1,26 @@
 "use client";
 
 import "react-day-picker/style.css";
-import { DateRange, DayFlag, DayPicker, DayPickerProps, getDefaultClassNames } from "react-day-picker";
+import {
+  DateRange,
+  DayFlag,
+  DayPicker,
+  DayPickerProps,
+  getDefaultClassNames,
+} from "react-day-picker";
 import { ibmPlexSans } from "@/app/lib/fonts";
 import { Footer } from "./components/footer";
 import { useState } from "react";
 import { Day, DayButton } from "./components/day-picker";
 import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
 import { useForceModal } from "./utils/useForceModal";
+import { rangeIncludesDisabledDays } from "./utils/utils";
 
 export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
   mode: ModeType;
-  disabled: DayPickerProps['disabled'];
+  disabled: DayPickerProps["disabled"];
 };
 
 export function Calendar({ mode, disabled }: CalendarProps) {
@@ -31,7 +38,13 @@ export function Calendar({ mode, disabled }: CalendarProps) {
       <DayPickerInternal
         mode="range"
         selected={selected}
-        onSelect={setSelected}
+        onSelect={(range) => {
+          if (rangeIncludesDisabledDays(range, disabled)) {
+            alert("Range contains disabled dates!");
+            return;
+          }
+          setSelected(range);
+        }}
         disabled={disabled}
         className={mode === "popup" ? "p-4" : ""}
         footer={!forceModal && <Footer />}
