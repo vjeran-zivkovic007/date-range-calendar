@@ -8,6 +8,7 @@ import { ibmPlexSans } from "@/app/lib/fonts";
 export const ModalCalendar = ({
   selected,
   children,
+  onConfirm,
 }: CalendarComponentProps) => {
   return (
     <Dialog.Root>
@@ -34,11 +35,13 @@ export const ModalCalendar = ({
               <Input
                 dateRange={selected}
                 className="static"
-                renderButton={<ConfirmButton disabled={!selected} />}
+                renderButton={
+                  <ConfirmButton disabled={!selected} onClick={onConfirm} />
+                }
               />
             </div>
             <div className="hidden md:block">
-              <ConfirmButton disabled={!selected} />
+              <ConfirmButton disabled={!selected} onClick={onConfirm} />
             </div>
           </div>
         </Dialog.Content>

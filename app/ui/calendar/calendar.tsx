@@ -14,14 +14,18 @@ import { useState } from "react";
 import { Day, DayButton } from "./components/day-picker";
 import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
 import { useForceModal } from "./utils/useForceModal";
-import { rangeIncludesDisabledDays } from "./utils/utils";
+import { formatDateRange, rangeIncludesDisabledDays } from "./utils/utils";
 
 export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
   mode: ModeType;
-  disabled: DayPickerProps["disabled"];
+  disabled?: DayPickerProps["disabled"];
 };
+
+function onConfirm(selected: DateRange) {
+  alert(`You selected ${formatDateRange(selected)}`);
+}
 
 export function Calendar({ mode, disabled }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
@@ -34,7 +38,10 @@ export function Calendar({ mode, disabled }: CalendarProps) {
   const CalendarComponent = useModal ? ModalCalendar : PopoverCalendar;
 
   return (
-    <CalendarComponent selected={selected}>
+    <CalendarComponent
+      selected={selected}
+      onConfirm={() => onConfirm(selected!)}
+    >
       <DayPickerInternal
         mode="range"
         selected={selected}
