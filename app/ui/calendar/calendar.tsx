@@ -33,10 +33,7 @@ export function Calendar({ variant }: CalendarProps) {
     return (
       <Popover.Root>
         <Popover.Trigger asChild>
-          <Input
-            dateRange={selected}
-            renderButton={<ConfirmButton />}
-          />
+          <Input dateRange={selected} renderButton={<ConfirmButton />} />
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content
@@ -61,18 +58,20 @@ export function Calendar({ variant }: CalendarProps) {
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-gray-60 animate-dialog-overlay" />
           <Dialog.Content
-            className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 rounded-xl animate-dialog-content ${ibmPlexSans.className} font-medium`}
+            className={`w-full md:size-auto fixed overflow-y-auto max-h-[100vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 md:rounded-xl animate-dialog-content ${ibmPlexSans.className} font-medium`}
           >
-            <Dialog.Title className="text-xl text-gray-100">
-              Choose Period of Stay
-            </Dialog.Title>
+            <div className="flex items-center justify-between mb-8">
+              <Dialog.Title className="text-lg md:text-xl text-gray-100">
+                Choose Period of Stay
+              </Dialog.Title>
+              <Dialog.Close asChild>
+                <ModalClose />
+              </Dialog.Close>
+            </div>
             {renderDayPicker()}
             <div className="flex justify-end pt-4">
               <ConfirmButton disabled={isConfirmDisabled} />
             </div>
-            <Dialog.Close asChild>
-              <ModalClose />
-            </Dialog.Close>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
@@ -99,9 +98,10 @@ function DayPickerInternal({
       classNames={{
         today: "",
         selected: `rdp-selected-1`,
-        root: `${defaultClassNames.root} rounded-xl p-5 bg-white-100`,
+        root: `${defaultClassNames.root} rounded-xl bg-white-100`,
         chevron: `fill-gray-60 w-4 h-4`,
         caption_label: `${defaultClassNames.caption_label} text-primary-100 text-base uppercase font-medium`,
+        months: `${defaultClassNames.months} justify-center`,
         weekdays: `uppercase`,
         weekday: `py-2 font-medium last:text-primary-100 text-xs`,
         footer: `${defaultClassNames.footer} pt-4`,

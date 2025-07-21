@@ -5,15 +5,15 @@ export const ModalClose = (
 ) => (
   <button
     aria-label="Close"
-    className="absolute top-4 right-4 w-5 h-5 hover:bg-gray-10 flex items-center justify-center"
+    className="w-6 h-6 md:w-5 md:h-5 hover:bg-gray-10 flex items-center justify-center"
     {...props}
   >
     <Image
       className="dark:invert"
       src="/close.svg"
       alt=""
-      width={16}
-      height={16}
+      width={20}
+      height={20}
     />
   </button>
 );
