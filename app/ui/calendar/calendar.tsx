@@ -20,14 +20,16 @@ export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
   mode: ModeType;
-  disabled?: DayPickerProps["disabled"];
+  disabledDates?: DayPickerProps["disabled"];
+  // availableDates: { date: Date, price?: number }[];
 };
 
 function onConfirm(selected: DateRange) {
   alert(`You selected ${formatDateRange(selected)}`);
+  // request to backend/database
 }
 
-export function Calendar({ mode, disabled }: CalendarProps) {
+export function Calendar({ mode, disabledDates }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
   const forceModal = useForceModal();
 
@@ -46,13 +48,13 @@ export function Calendar({ mode, disabled }: CalendarProps) {
         mode="range"
         selected={selected}
         onSelect={(range) => {
-          if (rangeIncludesDisabledDays(range, disabled)) {
+          if (rangeIncludesDisabledDays(range, disabledDates)) {
             alert("Range contains disabled dates!");
             return;
           }
           setSelected(range);
         }}
-        disabled={disabled}
+        disabled={disabledDates}
         className={mode === "popup" ? "p-4" : ""}
         footer={!forceModal && <Footer />}
       />
