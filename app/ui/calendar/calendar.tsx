@@ -1,7 +1,7 @@
 "use client";
 
 import "react-day-picker/style.css";
-import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
+import { DateRange, DayFlag, DayPicker, DayPickerProps, getDefaultClassNames } from "react-day-picker";
 import { ibmPlexSans } from "@/app/lib/fonts";
 import { Footer } from "./components/footer";
 import { useState } from "react";
@@ -13,9 +13,10 @@ export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
   mode: ModeType;
+  disabled: DayPickerProps['disabled'];
 };
 
-export function Calendar({ mode }: CalendarProps) {
+export function Calendar({ mode, disabled }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
   const forceModal = useForceModal();
 
@@ -31,6 +32,7 @@ export function Calendar({ mode }: CalendarProps) {
         mode="range"
         selected={selected}
         onSelect={setSelected}
+        disabled={disabled}
         className={mode === "popup" ? "p-4" : ""}
         footer={!forceModal && <Footer />}
       />
@@ -52,6 +54,7 @@ function DayPickerInternal({
       navLayout="around"
       weekStartsOn={1}
       className={`${ibmPlexSans.className} text-gray-100 ${className}`}
+      modifiersClassNames={{ [DayFlag.disabled]: "bg-gray-5" }}
       classNames={{
         today: "",
         selected: `rdp-selected-1`,
