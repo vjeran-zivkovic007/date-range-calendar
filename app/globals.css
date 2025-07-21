@@ -51,6 +51,32 @@ body {
   --color-white-20: #FFFFFF33;
   --color-white-10: #FFFFFF1A;
   --color-white-5: #FFFFFF0D;
+
+  --animate-dialog-overlay: show 1s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-dialog-content: show 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-popover-content: scaleIn 0.2s ease-out;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 @layer utilities {
@@ -90,19 +116,10 @@ body {
   border-right: 44px solid transparent;
 }
 
-.PopoverContent {
-  transform-origin: var(--radix-popover-content-transform-origin);
-  animation: scaleIn 0.2s ease-out;
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.input-box-shadow {
+  box-shadow:
+    11px 11px 34px 0px #0000000F,
+    44px 43px 62px 0px #0000000D,
+    100px 97px 83px 0px #00000008,
+    177px 172px 99px 0px #00000003;
 }

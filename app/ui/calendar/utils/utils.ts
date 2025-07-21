@@ -1,4 +1,4 @@
-import { DateRange } from "react-day-picker";
+import { dateMatchModifiers, DateRange, Matcher } from "react-day-picker";
 
 export const formatDateRange = (range: DateRange | undefined) => {
   if (!range || !range.from || !range.to) return "";
@@ -13,3 +13,23 @@ export const formatDateRange = (range: DateRange | undefined) => {
 
   return `${formatDate(range.from)} - ${formatDate(range.to)}`;
 };
+
+export function rangeIncludesDisabledDays(
+  range: DateRange | undefined,
+  disabled: Matcher | Matcher[] | undefined
+): boolean {
+  if (disabled === undefined) return false;
+  if (!range?.from || !range?.to) return false;
+
+  const current = new Date(range.from);
+  const end = new Date(range.to);
+
+  while (current <= end) {
+    const matched = dateMatchModifiers(current, disabled);
+
+    if (matched) return true;
+    current.setDate(current.getDate() + 1);
+  }
+
+  return false;
+}
