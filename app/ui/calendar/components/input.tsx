@@ -4,7 +4,7 @@ import { DateRange } from "react-day-picker";
 import { formatDateRange } from "../utils/utils";
 import type { ReactNode } from "react";
 
-interface InputPropsType extends React.HTMLAttributes<HTMLInputElement> {
+interface InputPropsType extends React.HTMLAttributes<HTMLDivElement> {
   dateRange: DateRange | undefined;
   renderButton?: ReactNode;
 }
@@ -17,7 +17,7 @@ export const Input = ({
   const formattedDate = formatDateRange(dateRange);
 
   return (
-    <div className="relative" {...props}>
+    <div className="fixed bottom-4 md:relative" {...props}>
       <div className="flex input-box-shadow px-2 py-2 min-h-[66px] md:min-h-[74px] bg-white-100 rounded-full shadow-sm border border-gray-10 cursor-pointer">
         <div className="flex items-center px-4">
           <Image

@@ -32,6 +32,7 @@ export function Calendar({ mode }: CalendarProps) {
         selected={selected}
         onSelect={setSelected}
         className={mode === "popup" ? "p-4" : ""}
+        footer={!forceModal && <Footer />}
       />
     </CalendarComponent>
   );
@@ -63,7 +64,6 @@ function DayPickerInternal({
         footer: `${defaultClassNames.footer} pt-4`,
         ...classNames,
       }}
-      footer={<Footer />}
       formatters={{
         formatWeekdayName: (date) =>
           date.toLocaleString("default", { weekday: "short" }),

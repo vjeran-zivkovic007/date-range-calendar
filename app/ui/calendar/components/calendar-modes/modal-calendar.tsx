@@ -29,8 +29,17 @@ export const ModalCalendar = ({
             </Dialog.Close>
           </div>
           {children}
-          <div className="flex justify-end pt-4">
-            <ConfirmButton disabled={!selected} />
+          <div className="flex justify-center md:justify-end pt-12 gap-x-2">
+            <div className="block md:hidden">
+              <Input
+                dateRange={selected}
+                className="static"
+                renderButton={<ConfirmButton disabled={!selected} />}
+              />
+            </div>
+            <div className="hidden md:block">
+              <ConfirmButton disabled={!selected} />
+            </div>
           </div>
         </Dialog.Content>
       </Dialog.Portal>
