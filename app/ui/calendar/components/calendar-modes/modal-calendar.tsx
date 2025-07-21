@@ -5,8 +5,10 @@ import { ModalClose } from "../modal-close";
 import { ConfirmButton } from "../confirm-button";
 import { ibmPlexSans } from "@/app/lib/fonts";
 
-export const ModalCalendar = ({ selected, children }: CalendarComponentProps) => {
-  const isConfirmDisabled = !selected;
+export const ModalCalendar = ({
+  selected,
+  children,
+}: CalendarComponentProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -15,6 +17,7 @@ export const ModalCalendar = ({ selected, children }: CalendarComponentProps) =>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-gray-60 animate-dialog-overlay" />
         <Dialog.Content
+          aria-describedby={undefined}
           className={`w-full md:size-auto fixed overflow-y-auto max-h-[100vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 md:rounded-xl animate-dialog-content ${ibmPlexSans.className} font-medium`}
         >
           <div className="flex items-center justify-between mb-8">
@@ -27,10 +30,10 @@ export const ModalCalendar = ({ selected, children }: CalendarComponentProps) =>
           </div>
           {children}
           <div className="flex justify-end pt-4">
-            <ConfirmButton disabled={isConfirmDisabled} />
+            <ConfirmButton disabled={!selected} />
           </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );
-}
+};

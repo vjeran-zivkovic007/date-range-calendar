@@ -10,7 +10,7 @@ export const PopoverCalendar = ({
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <Input dateRange={selected} renderButton={<ConfirmButton />} />
+        <Input dateRange={selected} renderButton={<ConfirmButton disabled={!selected} />} />
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
