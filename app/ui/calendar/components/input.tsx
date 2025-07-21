@@ -18,7 +18,7 @@ export const Input = ({
 
   return (
     <div className="relative" {...props}>
-      <div className="flex input-box-shadow px-2 py-2 min-h-[74px] bg-white-100 rounded-full shadow-sm border border-gray-10 cursor-pointer">
+      <div className="flex input-box-shadow px-2 py-2 min-h-[66px] md:min-h-[74px] bg-white-100 rounded-full shadow-sm border border-gray-10 cursor-pointer">
         <div className="flex items-center px-4">
           <Image
             className="dark:invert mx-4"

@@ -12,7 +12,7 @@ import { ModalClose } from "./components/modal-close";
 import { ConfirmButton } from "./components/confirm-button";
 import { Day, DayButton } from "./components/day-picker";
 
-type VariantType = "popup" | "modal";
+export type VariantType = "popup" | "modal";
 
 export type CalendarProps = {
   variant: VariantType;
