@@ -1,6 +1,12 @@
 import { DayButtonProps, DayProps } from "react-day-picker";
 
-export function Day({ children, className, ...props }: DayProps) {
+export function Day({
+  children,
+  className,
+  day,
+  modifiers,
+  ...props
+}: DayProps) {
   return (
     <td
       className={`${className} text-sm hover:bg-primary-10 text-gray-80`}
@@ -11,11 +17,17 @@ export function Day({ children, className, ...props }: DayProps) {
   );
 }
 
-export function DayButton({ day, className, ...props }: DayButtonProps) {
+export function DayButton({
+  className,
+  day,
+  modifiers,
+  ...props
+}: DayButtonProps) {
+  console.log(props.disabled, day.date.getDate());
   return (
     <button className={`${className} flex flex-col`} {...props}>
       {!day.outside && day.date.getDate()}
-      {!day.outside && (
+      {!day.outside && !props.disabled && (
         <span className="text-[9px] tracking-[-3%] text-gray-40">55€</span>
       )}
     </button>
