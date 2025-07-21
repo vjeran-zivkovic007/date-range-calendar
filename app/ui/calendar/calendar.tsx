@@ -2,84 +2,43 @@
 
 import "react-day-picker/style.css";
 import { DateRange, DayPicker, getDefaultClassNames } from "react-day-picker";
-import * as Popover from "@radix-ui/react-popover";
-import * as Dialog from "@radix-ui/react-dialog";
 import { ibmPlexSans } from "@/app/lib/fonts";
 import { Footer } from "./components/footer";
-import { Input } from "./components/input";
-import { useState } from "react";
-import { ModalClose } from "./components/modal-close";
-import { ConfirmButton } from "./components/confirm-button";
+import { useEffect, useState } from "react";
 import { Day, DayButton } from "./components/day-picker";
+import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
 
-export type VariantType = "popup" | "modal";
+export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
-  variant: VariantType;
+  mode: ModeType;
 };
 
-export function Calendar({ variant }: CalendarProps) {
+export function Calendar({ mode }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
+  const [forceModal, setForceModal] = useState<boolean>();
 
-  const renderDayPicker = () => (
-    <DayPickerInternal
-      mode="range"
-      selected={selected}
-      onSelect={setSelected}
-      className={`${variant === "popup" ? "p-4" : ""}`}
-    />
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 640;
+    setForceModal(isMobile);
+  }, []);
+
+  if (forceModal === undefined) return null;
+
+  const useModal = forceModal || mode === "modal";
+
+  const CalendarComponent = useModal ? ModalCalendar : PopoverCalendar;
+
+  return (
+    <CalendarComponent selected={selected}>
+      <DayPickerInternal
+        mode="range"
+        selected={selected}
+        onSelect={setSelected}
+        className={mode === "popup" ? "p-4" : ""}
+      />
+    </CalendarComponent>
   );
-
-  if (variant === "popup") {
-    return (
-      <Popover.Root>
-        <Popover.Trigger asChild>
-          <Input dateRange={selected} renderButton={<ConfirmButton />} />
-        </Popover.Trigger>
-        <Popover.Portal>
-          <Popover.Content
-            className="origin-(--radix-popover-content-transform-origin) animate-popover-content"
-            sideOffset={32}
-          >
-            {renderDayPicker()}
-          </Popover.Content>
-        </Popover.Portal>
-      </Popover.Root>
-    );
-  }
-
-  if (variant === "modal") {
-    const isConfirmDisabled = !selected;
-
-    return (
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <Input dateRange={selected} />
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 bg-gray-60 animate-dialog-overlay" />
-          <Dialog.Content
-            className={`w-full md:size-auto fixed overflow-y-auto max-h-[100vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white-100 md:rounded-xl animate-dialog-content ${ibmPlexSans.className} font-medium`}
-          >
-            <div className="flex items-center justify-between mb-8">
-              <Dialog.Title className="text-lg md:text-xl text-gray-100">
-                Choose Period of Stay
-              </Dialog.Title>
-              <Dialog.Close asChild>
-                <ModalClose />
-              </Dialog.Close>
-            </div>
-            {renderDayPicker()}
-            <div className="flex justify-end pt-4">
-              <ConfirmButton disabled={isConfirmDisabled} />
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    );
-  }
-
-  return null;
 }
 
 function DayPickerInternal({
