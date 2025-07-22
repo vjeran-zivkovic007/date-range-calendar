@@ -1,4 +1,5 @@
 import { dateMatchModifiers, DateRange, Matcher } from "react-day-picker";
+import { PricesByDateType } from "../calendar";
 
 export const formatDateRange = (range: DateRange | undefined) => {
   if (!range || !range.from || !range.to) return "";
@@ -54,4 +55,14 @@ export function isConfirmButtonDisabled(range: DateRange | undefined) {
   const end = new Date(range.to).getTime();
 
   return current === end;
+}
+
+export function getPriceForDate(
+  date: Date,
+  prices: PricesByDateType | undefined
+): number | undefined {
+  if (prices === undefined) return undefined;
+
+  const match = prices.find((p) => p.date.getTime() === date.getTime());
+  return match?.price;
 }

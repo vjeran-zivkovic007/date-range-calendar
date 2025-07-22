@@ -16,15 +16,18 @@ import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
 import { useForceModal } from "./utils/useForceModal";
 import {
   formatDateRange,
+  getPriceForDate,
   isCheckoutDate,
   rangeIncludesDisabledDays,
 } from "./utils/utils";
 
 export type ModeType = "popup" | "modal";
+export type PricesByDateType = { date: Date; price: number }[];
 
 export type CalendarProps = {
   mode: ModeType;
   disabledDates?: DayPickerProps["disabled"];
+  pricesByDate?: PricesByDateType;
 };
 
 function onConfirm(selected: DateRange) {
@@ -32,7 +35,7 @@ function onConfirm(selected: DateRange) {
   // request to backend/database
 }
 
-export function Calendar({ mode, disabledDates }: CalendarProps) {
+export function Calendar({ mode, disabledDates, pricesByDate }: CalendarProps) {
   const [selected, setSelected] = useState<DateRange | undefined>();
   const forceModal = useForceModal();
 
@@ -69,6 +72,7 @@ export function Calendar({ mode, disabledDates }: CalendarProps) {
         disabled={disabledDates}
         className={mode === "popup" ? "p-4" : ""}
         footer={!forceModal && <Footer />}
+        pricesByDate={pricesByDate}
       />
     </CalendarComponent>
   );
@@ -78,8 +82,11 @@ function DayPickerInternal({
   className,
   classNames,
   formatters,
+  pricesByDate,
   ...props
-}: React.ComponentProps<typeof DayPicker>) {
+}: React.ComponentProps<typeof DayPicker> & {
+  pricesByDate?: PricesByDateType;
+}) {
   const defaultClassNames = getDefaultClassNames();
 
   return (
@@ -108,7 +115,12 @@ function DayPickerInternal({
       }}
       components={{
         Day,
-        DayButton,
+        DayButton: (props) => (
+          <DayButton
+            {...props}
+            price={getPriceForDate(props.day.date, pricesByDate)}
+          />
+        ),
       }}
       {...props}
     />

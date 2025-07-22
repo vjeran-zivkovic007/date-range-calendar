@@ -21,13 +21,18 @@ export function DayButton({
   className,
   day,
   modifiers,
+  onPointerCancel,
+  price,
   ...props
-}: DayButtonProps) {
+}: DayButtonProps & { price: number | undefined }) {
+  const priceString = price ? `${price}€` : "";
   return (
     <button className={`${className} flex flex-col`} {...props}>
       {!day.outside && day.date.getDate()}
-      {!day.outside && !props.disabled && (
-        <span className="text-[9px] tracking-[-3%] text-gray-40">55€</span>
+      {!day.outside && !props.disabled && priceString && (
+        <span className="text-[9px] tracking-[-3%] text-gray-40">
+          {priceString}
+        </span>
       )}
     </button>
   );

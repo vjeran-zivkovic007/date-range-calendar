@@ -15,6 +15,12 @@ export const ClientCalendar = () => {
           { before: new Date() },
           { from: new Date(2025, 7, 13), to: new Date(2025, 7, 18) },
         ]}
+        pricesByDate={[
+          { date: new Date(2025, 7, 4), price: 65 },
+          { date: new Date(2025, 7, 5), price: 68 },
+          { date: new Date(2025, 7, 6), price: 68 },
+          { date: new Date(2025, 7, 7), price: 75 },
+        ]}
       />
     </>
   );
