@@ -22,11 +22,12 @@ import {
 } from "./utils/utils";
 
 export type ModeType = "popup" | "modal";
-export type PricesByDateType = { date: Date; price: number }[];
+export type PricesByDateType = { date: string; price: number }[];
+export type DisabledDatesType = DayPickerProps["disabled"]
 
 export type CalendarProps = {
   mode: ModeType;
-  disabledDates?: DayPickerProps["disabled"];
+  disabledDates?: DisabledDatesType;
   pricesByDate?: PricesByDateType;
 };
 

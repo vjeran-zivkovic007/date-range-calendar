@@ -63,6 +63,29 @@ export function getPriceForDate(
 ): number | undefined {
   if (prices === undefined) return undefined;
 
-  const match = prices.find((p) => p.date.getTime() === date.getTime());
+  const match = prices.find(
+    (p) => new Date(p.date).toDateString() === date.toDateString()
+  );
   return match?.price;
+}
+
+type DisabledDateRaw = { before: string } | { from: string; to: string };
+type DisabledDateParsed = { before: Date } | { from: Date; to: Date };
+
+export function parseDisabledDates(
+  raw: DisabledDateRaw[]
+): DisabledDateParsed[] {
+  return raw.map((entry) => {
+    if ("before" in entry) {
+      return { before: new Date(entry.before) };
+    }
+    if ("from" in entry && "to" in entry) {
+      return {
+        from: new Date(entry.from),
+        to: new Date(entry.to),
+      };
+    }
+
+    return entry as never;
+  });
 }
