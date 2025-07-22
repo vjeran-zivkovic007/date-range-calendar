@@ -14,14 +14,17 @@ import { useState } from "react";
 import { Day, DayButton } from "./components/day-picker";
 import { ModalCalendar, PopoverCalendar } from "./components/calendar-modes";
 import { useForceModal } from "./utils/useForceModal";
-import { formatDateRange, rangeIncludesDisabledDays } from "./utils/utils";
+import {
+  formatDateRange,
+  isCheckoutDate,
+  rangeIncludesDisabledDays,
+} from "./utils/utils";
 
 export type ModeType = "popup" | "modal";
 
 export type CalendarProps = {
   mode: ModeType;
   disabledDates?: DayPickerProps["disabled"];
-  // availableDates: { date: Date, price?: number }[];
 };
 
 function onConfirm(selected: DateRange) {
@@ -50,8 +53,17 @@ export function Calendar({ mode, disabledDates }: CalendarProps) {
         onSelect={(range) => {
           if (rangeIncludesDisabledDays(range, disabledDates)) {
             alert("Range contains disabled dates!");
+            setSelected(undefined);
             return;
           }
+          if (isCheckoutDate(range?.from, disabledDates)) {
+            alert(
+              "This date marks the end of availability — it can only be selected after a start date is chosen."
+            );
+            setSelected(undefined);
+            return;
+          }
+
           setSelected(range);
         }}
         disabled={disabledDates}

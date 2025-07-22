@@ -33,3 +33,13 @@ export function rangeIncludesDisabledDays(
 
   return false;
 }
+
+export function isCheckoutDate(date: Date | undefined, disabled: Matcher | Matcher[] | undefined): boolean {
+  if (date === undefined) return false;
+  if (disabled === undefined) return false;
+
+  const nextDay = new Date(date);
+  nextDay.setDate(date.getDate() + 1);
+
+  return dateMatchModifiers(nextDay, disabled);
+}
