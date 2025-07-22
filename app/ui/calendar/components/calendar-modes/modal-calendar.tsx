@@ -4,12 +4,15 @@ import { Input } from "../input";
 import { ModalClose } from "../modal-close";
 import { ConfirmButton } from "../confirm-button";
 import { ibmPlexSans } from "@/app/lib/fonts";
+import { isConfirmButtonDisabled } from "../../utils/utils";
 
 export const ModalCalendar = ({
   selected,
   children,
   onConfirm,
 }: CalendarComponentProps) => {
+  const isConfirmDisabled = isConfirmButtonDisabled(selected);
+
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -36,12 +39,15 @@ export const ModalCalendar = ({
                 dateRange={selected}
                 className="static"
                 renderButton={
-                  <ConfirmButton disabled={!selected} onClick={onConfirm} />
+                  <ConfirmButton
+                    disabled={isConfirmDisabled}
+                    onClick={onConfirm}
+                  />
                 }
               />
             </div>
             <div className="hidden md:block">
-              <ConfirmButton disabled={!selected} onClick={onConfirm} />
+              <ConfirmButton disabled={isConfirmDisabled} onClick={onConfirm} />
             </div>
           </div>
         </Dialog.Content>

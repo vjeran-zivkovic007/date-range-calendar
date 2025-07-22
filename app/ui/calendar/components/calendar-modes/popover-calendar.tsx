@@ -2,6 +2,7 @@ import * as Popover from "@radix-ui/react-popover";
 import { CalendarComponentProps } from "./types";
 import { Input } from "../input";
 import { ConfirmButton } from "../confirm-button";
+import { isConfirmButtonDisabled } from "../../utils/utils";
 
 export const PopoverCalendar = ({
   selected,
@@ -14,7 +15,7 @@ export const PopoverCalendar = ({
         <Input
           dateRange={selected}
           renderButton={
-            <ConfirmButton disabled={!selected} onClick={onConfirm} />
+            <ConfirmButton disabled={isConfirmButtonDisabled(selected)} onClick={onConfirm} />
           }
         />
       </Popover.Trigger>
