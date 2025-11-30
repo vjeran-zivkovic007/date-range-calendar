@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Date Range Calendar
+
+This is a customizable and responsive date range calendar component built with Next.js, React, and Tailwind CSS. It provides a user-friendly interface for selecting a range of dates, with features like displaying daily prices and disabling certain dates.
+
+## Features
+
+- **Date Range Selection:** Allows users to select a start and end date.
+- **Dual-Mode Display:** Can be rendered as a popover (`popup`) or a full-screen `modal`.
+- **Dynamic Pricing:** Displays prices for individual days within the calendar.
+- **Disabled Dates:** Supports disabling specific dates to prevent selection.
+- **Responsive Design:** Adapts to different screen sizes, with an automatic switch to modal view on smaller screens.
+- **Custom Styling:** Styled with Tailwind CSS for a modern and clean look.
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Library:** [React](https://reactjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Calendar Logic:** [React Day Picker](https://react-day-picker.js.org/)
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these simple steps.
 
-```bash
+### Prerequisites
+
+- Node.js (v20 or later)
+- npm
+
+### Installation
+
+1.  Clone the repo:
+    ```sh
+    git clone https://github.com/your_username/date-range-calendar.git
+    ```
+2.  Navigate to the project directory:
+    ```sh
+    cd date-range-calendar
+    ```
+3.  Install NPM packages:
+    ```sh
+    npm install
+    ```
+
+### Running the Application
+
+Run the development server:
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The calendar fetches data for disabled dates and daily prices from a local API endpoint:
 
-## Learn More
+- `GET /api`: Returns a JSON object with `disabledDates` and `pricesByDate`.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This endpoint simulates fetching data from a backend service. You can modify `app/api/route.ts` to customize the data provided to the calendar.
